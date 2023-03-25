@@ -1,0 +1,19 @@
+.Settings {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 20% 80%; /* last percentage = blank space */
+}
+
+.Settings__Button {
+    background-color: #131313;
+    padding: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

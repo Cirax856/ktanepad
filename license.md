@@ -1,0 +1,1 @@
+KTaNEPad is open source, and you can modify the program as you wish. Do not share the program as your own or modifying it without crediting the author (Cirax856).
