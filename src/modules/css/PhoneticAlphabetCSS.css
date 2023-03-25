@@ -1,0 +1,27 @@
+.PhoneticAlphabet {
+    height: 100%;
+    width: 100%;
+}
+
+.PhoneticAlphabet__Table {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+}
+
+.PhoneticAlphabet__Table tr {
+    border: 1px solid black;
+
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.PhoneticAlphabet__Table tr td:first-child {
+    padding-left: 15%;
+}
+
+.PhoneticAlphabet__X-Ray {
+    height: 1vh;
+}

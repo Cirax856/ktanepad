@@ -27,11 +27,11 @@ export function Topbar() {
     // HTML
     return (
         <div className="Topbar">
-            <img src={ktanepadLogo} alt="KTaNEPad Logo" className="Topbar__img" />
+            <img src={ktanepadLogo} alt="KTaNEPad" className="Topbar__img" />
             <p className="Topbar__Drag Topbar__Text">KTaNEPad</p>
-            <img src={maximizeLogo} alt="Maximize Image" className="Topbar__img Topbar__Pointer" onClick={maximize} />
-            <img src={minimizeLogo} alt="Minmize Image" className="Topbar__img Topbar__Pointer" onClick={minimize} />
-            <img src={closeLogo} alt="Close Image" className="Topbar__img Topbar__Pointer" onClick={close} />
+            <img src={maximizeLogo} alt="Maximize" className="Topbar__img Topbar__Pointer" onClick={maximize} />
+            <img src={minimizeLogo} alt="Minmize" className="Topbar__img Topbar__Pointer" onClick={minimize} />
+            <img src={closeLogo} alt="Close" className="Topbar__img Topbar__Pointer" onClick={close} />
         </div>
     );
 }

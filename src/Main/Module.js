@@ -14,6 +14,7 @@ import { NoModule } from '../modules/NoModule';
 import { Settings } from '../modules/Settings';
 import { MorseCodeTranslation } from '../modules/MorseCodeTranslation';
 import { BaseConverter } from '../modules/BaseConverter';
+import { PhoneticAlphabet } from '../modules/PhoneticAlphabet';
 
 // main function
 export function Module({ setIsLearning }) {
@@ -27,10 +28,11 @@ export function Module({ setIsLearning }) {
         <Settings setIsLearning={setIsLearning} />,
         <EnglishAlphabetWithPositions />,
         <MorseCodeTranslation />,
+        <PhoneticAlphabet />,
         <BaseConverter />
     ];
-    const moduleNames = ['English Alphabet With Positions', 'Morse Code Translation', 'Base Converter'];
-    const filteredModuleNames = ['English Alphabet With Positions', 'Morse Code Translation', 'Base Converter'].filter(name => searchValue.length < 2 ? true : name.toLowerCase().includes(searchValue.toLowerCase()));
+    const moduleNames = ['English Alphabet With Positions', 'Morse Code Translation', 'Phonetic Alphabet', 'Base Converter'];
+    const filteredModuleNames = ['English Alphabet With Positions', 'Morse Code Translation', 'Phonetic Alphabet', 'Base Converter'].filter(name => searchValue.length < 2 ? true : name.toLowerCase().includes(searchValue.toLowerCase()));
     const [moduleIndex, setModuleIndex] = useState(0);
 
     // search logic
