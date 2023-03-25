@@ -78,4 +78,4 @@ KTaNEPad is an interactive notepad with fields many different features:
 
 ## Download
 
-You can download KTaNEPad [here (mediafire link)](https://www.mediafire.com/file/so4be7sfyqjmx7p/KTaNEPad+Setup+0.1.0.exe/file) (the windows defender and many antiviruses may react weirdly, but [here (virustotal link)](https://www.virustotal.com/gui/file/c4f128c820b817e832ee73316b266f0af7e3c288684d1e53977836e9c6f08cfc/detection) is proof KTaNEPad is not a virus).
+You can download KTaNEPad [here (mediafire link)](https://www.mediafire.com/file/nmb619qllbuy532/KTaNEPad+Setup+0.1.0.exe/file) (the windows defender and many antiviruses may react weirdly, but [here (virustotal link)](https://www.virustotal.com/gui/file/c4f128c820b817e832ee73316b266f0af7e3c288684d1e53977836e9c6f08cfc/detection) is proof KTaNEPad is not a virus).
