@@ -13,6 +13,7 @@ import './main.css';
 
 // main function
 function App() {
+    // states and refs
     const [isLearning, setIsLearning] = useState(false);
     const TextfieldRef = useRef(null);
 
@@ -33,8 +34,8 @@ function App() {
                     <div className="Main__Container">
                         <Textfield classname="Main__Textfield" textAreaRef={TextfieldRef} />
                         <div className="Main__Right_Container">
-                            <Edgework className="Main__Edgework" textAreaRef={TextfieldRef} />
-                            <Module className="Main__Module" setIsLearning={setIsLearning} />
+                            <Edgework className="Main__Edgework" />
+                            <Module className="Main__Module" setIsLearning={setIsLearning} textAreaRef={TextfieldRef} />
                         </div>
                     </div>
                 )

@@ -17,7 +17,7 @@ import { BaseConverter } from '../modules/BaseConverter';
 import { PhoneticAlphabet } from '../modules/PhoneticAlphabet';
 
 // main function
-export function Module({ setIsLearning }) {
+export function Module({ setIsLearning, textAreaRef }) {
     // states
     const [isSearching, setIsSearching] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -29,10 +29,10 @@ export function Module({ setIsLearning }) {
         <EnglishAlphabetWithPositions />,
         <MorseCodeTranslation />,
         <PhoneticAlphabet />,
-        <BaseConverter />
+        <BaseConverter />,
     ];
     const moduleNames = ['English Alphabet With Positions', 'Morse Code Translation', 'Phonetic Alphabet', 'Base Converter'];
-    const filteredModuleNames = ['English Alphabet With Positions', 'Morse Code Translation', 'Phonetic Alphabet', 'Base Converter'].filter(name => searchValue.length < 2 ? true : name.toLowerCase().includes(searchValue.toLowerCase()));
+    const filteredModuleNames = moduleNames.filter(name => searchValue.length < 2 ? true : name.toLowerCase().includes(searchValue.toLowerCase()));
     const [moduleIndex, setModuleIndex] = useState(0);
 
     // search logic

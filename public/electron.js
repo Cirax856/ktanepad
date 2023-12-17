@@ -1,9 +1,13 @@
-const { app, BrowserWindow, ipcMain, shell } = require('electron');
+const { app, BrowserWindow, ipcMain, shell, dialog } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
+const fs = require('fs');
+const { autoUpdater } = require("electron-updater");
 
+
+let mainWindow;
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 960,
     height: 540,
     frame: false,
@@ -16,40 +20,79 @@ function createWindow() {
   });
 
   ipcMain.on('close', () => {
-    win.close();
+    mainWindow.close();
   });
 
   ipcMain.on('max', () => {
-    win.isMaximized() ? win.unmaximize() : win.maximize();
+    mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize();
   });
 
   ipcMain.on('min', () => {
-    win.minimize();
+    mainWindow.minimize();
   });
 
   ipcMain.on('visitKtaneTimwiDe', () => {
     shell.openExternal('https://ktane.timwi.de/');
   });
 
-  win.loadURL(
+  ipcMain.on('get-user-data-path', (event) => {
+    const userDataPath = app.getPath('userData');
+    event.reply('user-data-path', userDataPath);
+  });
+
+  mainWindow.loadURL(
     isDev
     ? 'http://localhost:3000'
     : `file://${path.join(__dirname, '../build/index.html')}`
-    );
+  );
 }
 
 app.on('ready', () => {
   createWindow();
+
+  autoUpdater.setFeedURL({
+    repo: 'KTaNEPad',
+    owner: 'Cirax856',
+    provider: 'github'
+  });
+
+  autoUpdater.checkForUpdates();
 });
 
 app.on('window-all-closed', () => {
-  if(process.platform !== 'darwin') {
+  if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
 app.on('activate', () => {
-  if(BrowserWindow.getAllWindows().length === 0) {
+  if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {
+    const dialogOpts = {
+        type: 'info',
+        buttons: ['Ok'],
+        title: 'New version of KTaNEPad is available!',
+        message: process.platform === 'win32' ? releaseNotes : releaseName,
+        detail: 'A new version of KTaNEPad is available and being currently installed. It is recommended not to start a bomb while the update is installing as you might get another pop-up.'
+    };
+
+    dialog.showMessageBox(dialogOpts);
+});
+
+autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
+    const dialogOpts = {
+        type: 'info',
+        buttons: ['Restart', 'Later'],
+        title: 'Update installed!',
+        message: process.platform === 'win32' ? releaseNotes : releaseName,
+        detail: 'A new version of KTaNEPad has been downloaded. Would you like to restart now or later?'
+    };
+
+    dialog.showMessageBox(dialogOpts).then((returnValue) => {
+        if(returnValue.response === 0) autoUpdater.quitAndInstall();
+    });
 });

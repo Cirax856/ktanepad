@@ -1,36 +1,45 @@
 // import React
-import { useRef, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // importing CSS
 import './css/TextfieldCSS.css';
 
 // main function
-export function Textfield({ textAreaRef }) {
+export function Textfield({ textAreaRef })
+{
     // line numbers state
-    const [lineNumbers, setLineNumbers] = useState(['']);
+    const [lines, setLines] = useState([0]);
 
-    // ref variable
-    const lineNumbersRef = useRef(null);
-
-    function handleTextareaScroll() {
-        lineNumbersRef.current.scrollTop = textAreaRef.current.scrollTop;
+    function newInput(e)
+    {
+        let newId = parseInt(e.target.id.match(/\d+/)) + 1;
+        setLines([...lines, newId]);
     }
 
-    function handleTextareaTextChange(e) {
-        const text = e.target.value;
-        const lines = text.split('\n');
-        setLineNumbers(lines);
+    useEffect(() => document.getElementById(`Textfield__Input${lines[lines.length - 1]}`).focus(), [lines]);
+
+    function lineClick(e)
+    {
+        document.getElementById(`Textfield__Input${e.target.id.match(/\d+/)}`).focus();
+    }
+
+    function outsideClick(e)
+    {
+        if (e.target.className === "Textfield") document.getElementById(`Textfield__Input${lines.length - 1}`).focus();
     }
 
     // HTML
     return (
-        <div className="Textfield">
-            <div className="Textfield__LineNumbers" ref={lineNumbersRef}>
-                {lineNumbers.map((line, index) => {
-                    return <div key={index}>{index + 1}</div>;
-                })}
-            </div>
-            <textarea ref={textAreaRef} spellCheck="false" className="Textfield__Textarea" onChange={handleTextareaTextChange} onScroll={handleTextareaScroll} tabIndex="5"></textarea>
+        <div className="Textfield" onClick={event => { outsideClick(event) }}>
+            {lines.map((line, index) =>
+            {
+                return (
+                    <div className="Textfield__Line" id={index} onClick={event => { lineClick(event) }}>
+                        <p className="Textfield__LineNumber" id={index}>{index + 1}</p>
+                        <input className="Textfield__Input" id={`Textfield__Input${index}`} onKeyDown={event => { if (event.key === 'Enter') newInput(event); }}></input>
+                    </div>
+                )
+            })}
         </div>
     );
 }
