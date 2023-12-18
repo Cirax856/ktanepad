@@ -4,86 +4,108 @@ const isDev = require('electron-is-dev');
 const fs = require('fs');
 const { autoUpdater } = require("electron-updater");
 
-
 let mainWindow;
-function createWindow() {
-  mainWindow = new BrowserWindow({
-    width: 960,
-    height: 540,
-    frame: false,
-    title: "KTaNEPad",
-    icon: __dirname + "/ktanepadlogo.png",
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    }
-  });
+function createWindow()
+{
+    mainWindow = new BrowserWindow({
+        width: 960,
+        height: 540,
+        frame: false,
+        title: "KTaNEPad",
+        icon: __dirname + "/ktanepadlogo.png",
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
 
-  ipcMain.on('close', () => {
-    mainWindow.close();
-  });
+    ipcMain.on('close', () =>
+    {
+        mainWindow.close();
+    });
 
-  ipcMain.on('max', () => {
-    mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize();
-  });
+    ipcMain.on('max', () =>
+    {
+        mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize();
+    });
 
-  ipcMain.on('min', () => {
-    mainWindow.minimize();
-  });
+    ipcMain.on('min', () =>
+    {
+        mainWindow.minimize();
+    });
 
-  ipcMain.on('visitKtaneTimwiDe', () => {
-    shell.openExternal('https://ktane.timwi.de/');
-  });
+    ipcMain.on('visitKtaneTimwiDe', () =>
+    {
+        shell.openExternal('https://ktane.timwi.de/');
+    });
 
-  ipcMain.on('get-user-data-path', (event) => {
-    const userDataPath = app.getPath('userData');
-    event.reply('user-data-path', userDataPath);
-  });
+    ipcMain.on('get-user-data-path', (event) =>
+    {
+        const userDataPath = app.getPath('userData');
+        event.reply('user-data-path', userDataPath);
+    });
 
-  mainWindow.loadURL(
-    isDev
-    ? 'http://localhost:3000'
-    : `file://${path.join(__dirname, '../build/index.html')}`
-  );
+    mainWindow.loadURL(
+        isDev
+            ? 'http://localhost:3000'
+            : `file://${path.join(__dirname, '../build/index.html')}`
+    );
 }
 
-app.on('ready', () => {
-  createWindow();
-
-  autoUpdater.setFeedURL({
-    repo: 'KTaNEPad',
-    owner: 'Cirax856',
-    provider: 'github'
-  });
-
-  autoUpdater.checkForUpdates();
-});
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
+app.on('ready', () =>
+{
     createWindow();
-  }
+
+    autoUpdater.setFeedURL({
+        repo: 'ktanepad',
+        owner: 'Cirax856',
+        provider: 'github'
+    });
+
+    autoUpdater.checkForUpdates();
 });
 
-autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {
+app.on('window-all-closed', () =>
+{
+    if (process.platform !== 'darwin')
+    {
+        app.quit();
+    }
+});
+
+app.on('activate', () =>
+{
+    if (BrowserWindow.getAllWindows().length === 0)
+    {
+        createWindow();
+    }
+});
+
+autoUpdater.on("update-available", (_event, releaseNotes, releaseName) =>
+{
     const dialogOpts = {
         type: 'info',
         buttons: ['Ok'],
         title: 'New version of KTaNEPad is available!',
         message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'A new version of KTaNEPad is available and being currently installed. It is recommended not to start a bomb while the update is installing as you might get another pop-up.'
+        detail: 'A new version of KTaNEPad is available and being currently installed. It is recommended not to start a bomb while the update is installing.'
     };
 
     dialog.showMessageBox(dialogOpts);
 });
 
-autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
+autoUpdater.on("download-progress", (progressObj) =>
+{
+    log.info(`Downloaded ${progressObj.transferred}/${progressObj.total} (${progressObj.percent}%)`);
+});
+
+autoUpdater.on("error", (err) =>
+{
+    log.info('Error in the autoupdater: ' + err);
+});
+
+autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) =>
+{
     const dialogOpts = {
         type: 'info',
         buttons: ['Restart', 'Later'],
@@ -92,7 +114,8 @@ autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
         detail: 'A new version of KTaNEPad has been downloaded. Would you like to restart now or later?'
     };
 
-    dialog.showMessageBox(dialogOpts).then((returnValue) => {
-        if(returnValue.response === 0) autoUpdater.quitAndInstall();
+    dialog.showMessageBox(dialogOpts).then((returnValue) =>
+    {
+        if (returnValue.response === 0) autoUpdater.quitAndInstall();
     });
 });
