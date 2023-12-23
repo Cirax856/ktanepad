@@ -1,5 +1,5 @@
 // importing React
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
 // importing parts
@@ -15,7 +15,6 @@ import './main.css';
 function App() {
     // states and refs
     const [isLearning, setIsLearning] = useState(false);
-    const TextfieldRef = useRef(null);
 
     // HTML
     return (
@@ -32,10 +31,10 @@ function App() {
                 :
                 (
                     <div className="Main__Container">
-                        <Textfield classname="Main__Textfield" textAreaRef={TextfieldRef} />
+                        <Textfield classname="Main__Textfield" />
                         <div className="Main__Right_Container">
                             <Edgework className="Main__Edgework" />
-                            <Module className="Main__Module" setIsLearning={setIsLearning} textAreaRef={TextfieldRef} />
+                            <Module className="Main__Module" setIsLearning={setIsLearning} />
                         </div>
                     </div>
                 )

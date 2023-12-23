@@ -1,6 +1,6 @@
 {
   "name": "ktanepad",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
@@ -14,12 +14,10 @@
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
     "electron-is-dev": "^2.0.0",
-    "electron-log": "^4.4.8",
     "electron-updater": "^4.6.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "Squirrel": "^0.0.1",
+    "react-scripts": "^5.0.1",
     "wait-on": "^7.0.1",
     "web-vitals": "^2.1.4"
   },

@@ -4,6 +4,8 @@ const isDev = require('electron-is-dev');
 const fs = require('fs');
 const { autoUpdater } = require("electron-updater");
 
+autoUpdater.autoDownload = true;
+
 let mainWindow;
 function createWindow()
 {
@@ -88,27 +90,17 @@ autoUpdater.on("update-available", (_event, releaseNotes, releaseName) =>
         buttons: ['Ok'],
         title: 'New version of KTaNEPad is available!',
         message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'A new version of KTaNEPad is available and being currently installed. It is recommended not to start a bomb while the update is installing.'
+        detail: 'A new version of KTaNEPad is available and being currently downloaded. It is recommended not to start a bomb while the update is installing.'
     };
 
     dialog.showMessageBox(dialogOpts);
-});
-
-autoUpdater.on("download-progress", (progressObj) =>
-{
-    log.info(`Downloaded ${progressObj.transferred}/${progressObj.total} (${progressObj.percent}%)`);
-});
-
-autoUpdater.on("error", (err) =>
-{
-    log.info('Error in the autoupdater: ' + err);
 });
 
 autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) =>
 {
     const dialogOpts = {
         type: 'info',
-        buttons: ['Restart', 'Later'],
+        buttons: ['Restart', 'Later (installs on exit)'],
         title: 'Update installed!',
         message: process.platform === 'win32' ? releaseNotes : releaseName,
         detail: 'A new version of KTaNEPad has been downloaded. Would you like to restart now or later?'

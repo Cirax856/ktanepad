@@ -17,7 +17,7 @@ import { BaseConverter } from '../modules/BaseConverter';
 import { PhoneticAlphabet } from '../modules/PhoneticAlphabet';
 
 // main function
-export function Module({ setIsLearning, textAreaRef }) {
+export function Module({ setIsLearning }) {
     // states
     const [isSearching, setIsSearching] = useState(false);
     const [searchValue, setSearchValue] = useState('');

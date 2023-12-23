@@ -10,7 +10,6 @@
     color: white;
     overflow-y: scroll;
     margin-bottom: 30px;
-    font-family: 'Courier New', Courier, monospace;
 }
 
 .Textfield__Line {
@@ -20,6 +19,7 @@
 
 .Textfield__LineNumber {
     padding: 0 .2em;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .Textfield__Input {
@@ -27,6 +27,7 @@
     border: none;
     outline: none;
     width: 100%;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .Textfield__Input:focus {

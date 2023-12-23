@@ -5,58 +5,91 @@ import { useState, useEffect } from 'react';
 import './css/TextfieldCSS.css';
 
 // main function
-export function Textfield({ textAreaRef })
+export function Textfield()
 {
-    // line numbers state
-    const [lines, setLines] = useState([0]);
+    const [lines, setLines] = useState([{ id: 1, content: '' }]);
+    const [focusedLine, setFocusedLine] = useState(1);
 
-    function manageInput(e)
+    function createLine(lineId)
     {
-        if (e.key === 'Enter') newLine(e);
-        if (e.key === 'ArrowUp') moveLine(e, 'up');
-        if (e.key === 'ArrowDown') moveLine(e, 'down');
-    }
+        setLines((prevLines) =>
+        {
+            const index = prevLines.findIndex((line) => line.id === lineId);
+            const newLine = { id: prevLines.length + 1, content: '' };
 
-    function newLine(e)
+            const updatedLines = [
+                ...prevLines.slice(0, index + 1),
+                newLine,
+                ...prevLines.slice(index + 1),
+            ];
+
+            setFocusedLine(focusedLine + 1);
+
+            return updatedLines.map((line, idx) => ({ ...line, id: idx + 1 }));
+        });
+    };
+
+    useEffect(() =>
     {
-        let newId = parseInt(e.target.id.match(/\d+/)) + 1;
-        setLines([...lines, newId]);
-    }
+        document.getElementById(`Textfield__Input${focusedLine}`).focus();
+    }, [focusedLine]);
 
-    useEffect(() => document.getElementById(`Textfield__Input${lines[lines.length - 1]}`).focus(), [lines]);
+    function manageInput(e, lineId)
+    {
+        setLines((prevLines) =>
+            prevLines.map((line) =>
+                line.id === lineId ? { ...line, content: e.target.value } : line
+            )
+        );
+    };
 
     function moveLine(e, dir)
     {
-        let newId = parseInt(e.target.id.match(/\d+/));
-
-        if (dir === 'up' && newId !== 0) newId--;
-        if (dir === 'down' && newId !== lines.length - 1) newId++;
-
-        document.getElementById(`Textfield__Input${newId}`).focus();
+        if (dir === 'up' && focusedLine !== 1) setFocusedLine(focusedLine - 1);
+        if (dir === 'down' && focusedLine !== lines.length) setFocusedLine(focusedLine + 1);
     }
 
-    function lineClick(e)
+    function deleteLine(e, backspace)
     {
-        document.getElementById(`Textfield__Input${e.target.id.match(/\d+/)}`).focus();
-    }
-
-    function outsideClick(e)
-    {
-        if (e.target.className === "Textfield") document.getElementById(`Textfield__Input${lines.length - 1}`).focus();
-    }
-
-    // HTML
-    return (
-        <div className="Textfield" onClick={event => { outsideClick(event) }}>
-            {lines.map((line, index) =>
+        if (focusedLine !== 1)
+        {
+            setLines((prevLines) =>
             {
-                return (
-                    <div className="Textfield__Line" id={index} onClick={event => { lineClick(event) }}>
-                        <p className="Textfield__LineNumber" id={index}>{index + 1}</p>
-                        <input className="Textfield__Input" id={`Textfield__Input${index}`} onKeyDown={event => { manageInput(event); }}></input>
-                    </div>
-                )
-            })}
+                const index = prevLines.findIndex((line) => line.id === focusedLine);
+
+                if (backspace) prevLines.filter((line) => line.id === focusedLine - 1)[0].content += e.target.value;
+                lines.splice(index, 1);
+                return lines.map((line, idx) => ({ ...line, id: idx + 1 }));
+            });
+
+            setFocusedLine(focusedLine - 1);
+        }
+    }
+
+    function handleKeyDown(e)
+    {
+        if (e.key === 'Enter') createLine(focusedLine);
+        if (e.key === 'ArrowUp') moveLine(e, 'up');
+        if (e.key === 'ArrowDown') moveLine(e, 'down');
+        if (e.key === 'Delete') deleteLine(e, false);
+        if (e.key === 'Backspace' && e.target.selectionStart === 0) deleteLine(e, true);
+    };
+
+    return (
+        <div className="Textfield">
+            {lines.map((line) => (
+                <div className="Textfield__Line" id={line.id}>
+                    <p className="Textfield__LineNumber">{line.id}</p>
+                    <input
+                        className="Textfield__Input"
+                        id={`Textfield__Input${line.id}`}
+                        value={line.content}
+                        onChange={(e) => manageInput(e, line.id)}
+                        onKeyDown={handleKeyDown}
+                        onFocus={() => setFocusedLine(line.id)}
+                    />
+                </div>
+            ))}
         </div>
     );
 }
