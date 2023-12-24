@@ -51,6 +51,8 @@ export function Textfield()
 
     function deleteLine(e, backspace)
     {
+        e.preventDefault();
+
         if (focusedLine !== 1)
         {
             setLines((prevLines) =>

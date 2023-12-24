@@ -49,7 +49,7 @@ KTaNEPad is an interactive notepad with fields many different features:
 <div>
 
     The most advanced feature that KTaNEPad has to offer is the module 
-    field. The module field
+    field.
 </div>
 </td>
 <td>

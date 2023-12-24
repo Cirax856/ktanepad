@@ -96,14 +96,25 @@ autoUpdater.on("update-available", (_event, releaseNotes, releaseName) =>
     dialog.showMessageBox(dialogOpts);
 });
 
+autoUpdater.on("download-progress", (progressObj) =>
+{
+    const dialogOpts = {
+        type: 'info',
+        title: 'Updating…',
+        detail: `Installed ${progressObj.transferred}/${progressObj.total} (${progressObj.percent}%).`
+    };
+
+    dialog.showMessageBox(dialogOpts);
+});
+
 autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) =>
 {
     const dialogOpts = {
         type: 'info',
-        buttons: ['Restart', 'Later (installs on exit)'],
+        buttons: ['Restart KTaNEPad', 'Later (installs on exit)'],
         title: 'Update installed!',
         message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'A new version of KTaNEPad has been downloaded. Would you like to restart now or later?'
+        detail: 'A new version of KTaNEPad has been downloaded. Would you like to restart KTaNEPad now or later?'
     };
 
     dialog.showMessageBox(dialogOpts).then((returnValue) =>
