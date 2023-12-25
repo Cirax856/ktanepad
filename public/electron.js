@@ -83,13 +83,13 @@ app.on('activate', () =>
     }
 });
 
-autoUpdater.on("update-available", (_event, releaseNotes, releaseName) =>
+autoUpdater.on("update-available", (updateInfo) =>
 {
     const dialogOpts = {
         type: 'info',
         buttons: ['Ok'],
-        title: `New version of KTaNEPad is available! (${releaseName})`,
-        detail: `A new version of KTaNEPad is available and being currently downloaded. It is recommended not to start a bomb while the update is installing.\nPatch notes:\n${releaseNotes}`
+        title: `New version of KTaNEPad is available! (${updateInfo.version})`,
+        detail: `A new version of KTaNEPad is available and being currently downloaded. It is recommended not to start a bomb while the update is installing.\nPatch notes:\n${updateInfo.releaseNotes}`
     };
 
     dialog.showMessageBox(dialogOpts);
