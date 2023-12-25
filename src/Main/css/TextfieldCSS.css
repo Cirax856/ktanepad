@@ -26,6 +26,7 @@
 .Textfield__LineNumber {
     display: flex;
     justify-content: center;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .Textfield__Textarea {
@@ -39,4 +40,5 @@
     padding-left: 5px;
     line-height: 1rem;
     margin-left: .2rem;
+    font-family: 'Roboto Mono', monospace;
 }

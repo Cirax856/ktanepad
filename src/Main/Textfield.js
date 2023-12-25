@@ -28,13 +28,19 @@ export function Textfield()
     {
         e.preventDefault();
 
-        const { selectionStart, selectionEnd } = textAreaRef.current;
-        const text = textAreaRef.current.value;
+        const { selectionStart } = e.target;
+        const lines = textAreaRef.current.value.split('\n');
+        const currentLineIndex = lines.length > 0 ? lines.slice(0, selectionStart || 0).length - 1 : 0;
+        const currentLineContent = lines.length > 0 ? lines[currentLineIndex] : '';
 
-        const updatedText = text.substring(0, selectionStart) + '\t' + text.substring(selectionEnd);
+        const spacesToAdd = 4 - (currentLineContent === undefined ? 0 : currentLineContent.length % 4);
 
-        textAreaRef.current.value = updatedText;
-        textAreaRef.current.setSelectionRange(selectionStart + 1, selectionStart + 1);
+        const newText = textAreaRef.current.value.slice(0, selectionStart || 0) + ' '.repeat(spacesToAdd) + textAreaRef.current.value.slice(selectionStart || 0);
+
+        textAreaRef.current.value = newText;
+
+        const newCursorPosition = (selectionStart || 0) + spacesToAdd;
+        textAreaRef.current.setSelectionRange(newCursorPosition, newCursorPosition);
     }
 
     function handleKeyDown(e)
