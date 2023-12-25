@@ -88,24 +88,24 @@ autoUpdater.on("update-available", (_event, releaseNotes, releaseName) =>
     const dialogOpts = {
         type: 'info',
         buttons: ['Ok'],
-        title: 'New version of KTaNEPad is available!',
-        message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'A new version of KTaNEPad is available and being currently downloaded. It is recommended not to start a bomb while the update is installing.'
+        title: `New version of KTaNEPad is available! (${releaseName})`,
+        detail: `A new version of KTaNEPad is available and being currently downloaded. It is recommended not to start a bomb while the update is installing.\nPatch notes:\n${releaseNotes}`
     };
 
     dialog.showMessageBox(dialogOpts);
 });
 
-autoUpdater.on("download-progress", (progressObj) =>
+autoUpdater.on("error", (err) =>
 {
     const dialogOpts = {
-        type: 'info',
-        title: 'Updating…',
-        detail: `Installed ${progressObj.transferred}/${progressObj.total} (${progressObj.percent}%).`
-    };
+        type: 'error',
+        buttons: ['Ok'],
+        title: 'ERROR!',
+        detail: `KTaNEPad has encountered an error, please report it to the author:\n${err}`
+    }
 
     dialog.showMessageBox(dialogOpts);
-});
+})
 
 autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) =>
 {
