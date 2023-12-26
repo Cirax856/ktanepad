@@ -2,7 +2,7 @@
 import './css/SettingsCSS.css';
 
 // main function
-export function Settings({ setIsLearning }) {
+export function Settings({ setIsLearning, setIsOptions }) {
     // importing shell
     const { shell } = window.require('electron');
 
@@ -12,7 +12,12 @@ export function Settings({ setIsLearning }) {
     }
 
     function learning() {
-        setIsLearning(current => !current);
+        setIsLearning(true);
+    }
+
+    function options()
+    {
+        setIsOptions(true);
     }
 
     // HTML
@@ -20,6 +25,7 @@ export function Settings({ setIsLearning }) {
         <div className="Settings">
             <button className="Settings__Button" onClick={learning}>Learning</button>
             <button className="Settings__Button" onClick={visit}>Visit ktane.timwi.de</button>
+            <button className="Settings__Button" onClick={options}>Options</button>
         </div>
     );
 }

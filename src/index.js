@@ -12,9 +12,11 @@ import { Module } from './Main/Module';
 import './main.css';
 
 // main function
-function App() {
+function App()
+{
     // states and refs
     const [isLearning, setIsLearning] = useState(false);
+    const [isOptions, setIsOptions] = useState(false);
 
     // HTML
     return (
@@ -22,22 +24,32 @@ function App() {
             <Topbar className="Main__Topbar" />
             {
                 isLearning
-                ?
-                (
-                    <div className="Main_Learning__Container">
-                        <h1>COMING SOON</h1>
-                    </div>
-                )
-                :
-                (
-                    <div className="Main__Container">
-                        <Textfield classname="Main__Textfield" />
-                        <div className="Main__Right_Container">
-                            <Edgework className="Main__Edgework" />
-                            <Module className="Main__Module" setIsLearning={setIsLearning} />
+                    ?
+                    (
+                        <div className="Main_Learning__Container">
+                            <h1>COMING SOON</h1>
                         </div>
-                    </div>
-                )
+                    )
+                    :
+                    (
+                        isOptions
+                            ?
+                            (
+                                <div className="Main_Options__Container">
+                                    <h1>COMING SOON</h1>
+                                </div>
+                            )
+                            :
+                            (
+                                <div className="Main__Container">
+                                    <Textfield classname="Main__Textfield" />
+                                    <div className="Main__Right_Container">
+                                        <Edgework className="Main__Edgework" />
+                                        <Module className="Main__Module" setIsLearning={setIsLearning} setIsOptions={setIsOptions} />
+                                    </div>
+                                </div >
+                            )
+                    )
             }
         </>
     );

@@ -21,6 +21,7 @@
     line-height: 1rem;
     overflow: hidden;
     font-size: 80%;
+    padding-top: .2rem;
 }
 
 .Textfield__LineNumber {
@@ -41,4 +42,5 @@
     line-height: 1rem;
     margin-left: .2rem;
     font-family: 'Roboto Mono', monospace;
+    padding-top: .2rem;
 }

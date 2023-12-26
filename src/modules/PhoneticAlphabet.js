@@ -9,7 +9,7 @@ export function PhoneticAlphabet() {
             <table className="PhoneticAlphabet__Table">
                 <tr>
                     <td>A</td>
-                    <td>Alpha</td>
+                    <td>Alfa</td>
                 </tr>
                 <tr>
                     <td>B</td>
@@ -45,7 +45,7 @@ export function PhoneticAlphabet() {
                 </tr>
                 <tr>
                     <td>J</td>
-                    <td>Juliet</td>
+                    <td>Juliett</td>
                 </tr>
                 <tr>
                     <td>K</td>

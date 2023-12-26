@@ -18,7 +18,7 @@ export function Edgework() {
     return (
         <div className="Edgework">
             <div className="Edgework__Container">
-                <textarea className="Edgework__Textarea" ref={EdgeworkTextareaRef} tabIndex="-1"></textarea>
+                <textarea className="Edgework__Textarea" ref={EdgeworkTextareaRef} tabIndex="-1" spellCheck="false"></textarea>
                 <button className="Edgework__Clear" onClick={EdgeworkClear} tabIndex="-1">CLEAR</button>
             </div>
         </div>

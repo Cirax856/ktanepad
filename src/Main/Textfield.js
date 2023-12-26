@@ -7,11 +7,14 @@ import './css/TextfieldCSS.css';
 // main function
 export function Textfield()
 {
+    // states
     const [lineNumbers, setLineNumbers] = useState(['']);
 
+    // refs
     const lineNumbersRef = useRef(null);
     const textAreaRef = useRef(null);
 
+    // text area features
     function handleTextareaScroll()
     {
         lineNumbersRef.current.scrollTop = textAreaRef.current.scrollTop;

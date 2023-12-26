@@ -17,7 +17,8 @@ import { BaseConverter } from '../modules/BaseConverter';
 import { PhoneticAlphabet } from '../modules/PhoneticAlphabet';
 
 // main function
-export function Module({ setIsLearning }) {
+export function Module({ setIsLearning, setIsOptions })
+{
     // states
     const [isSearching, setIsSearching] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -25,7 +26,7 @@ export function Module({ setIsLearning }) {
     // module array
     const modules = [
         <NoModule />,
-        <Settings setIsLearning={setIsLearning} />,
+        <Settings setIsLearning={setIsLearning} setIsOptions={setIsOptions} />,
         <EnglishAlphabetWithPositions />,
         <MorseCodeTranslation />,
         <PhoneticAlphabet />,
@@ -36,17 +37,21 @@ export function Module({ setIsLearning }) {
     const [moduleIndex, setModuleIndex] = useState(0);
 
     // search logic
-    function ModuleSearchCheck(e) {
-        if(e.target.value.length > 0) {
+    function ModuleSearchCheck(e)
+    {
+        if (e.target.value.length > 0)
+        {
             setIsSearching(true);
-        } else {
+        } else
+        {
             setIsSearching(false);
         }
 
         setSearchValue(e.target.value);
     }
 
-    function moduleClick(e) {
+    function moduleClick(e)
+    {
         setSearchValue('');
         setIsSearching(false);
 
@@ -54,11 +59,13 @@ export function Module({ setIsLearning }) {
     }
 
     // image click
-    function searchIconClick() {
+    function searchIconClick()
+    {
         setModuleIndex(0);
     }
 
-    function settingsClick() {
+    function settingsClick()
+    {
         setModuleIndex(1);
     }
 
@@ -69,18 +76,19 @@ export function Module({ setIsLearning }) {
                 <div className="Module__Content">
                     {
                         isSearching
-                        ?
-                        (
-                            <div className="Module__SearchResults">
-                                {
-                                    filteredModuleNames.map(x => {
-                                        return <button value={x} onClick={(e) => {moduleClick(e.target.value)}} className="Module__ModuleButton">{x}</button>
-                                    })
-                                }
-                            </div>
-                        )
-                        :
-                        modules[moduleIndex]
+                            ?
+                            (
+                                <div className="Module__SearchResults">
+                                    {
+                                        filteredModuleNames.map(x =>
+                                        {
+                                            return <button value={x} onClick={(e) => { moduleClick(e.target.value) }} className="Module__ModuleButton">{x}</button>
+                                        })
+                                    }
+                                </div>
+                            )
+                            :
+                            modules[moduleIndex]
                     }
                 </div>
                 <div className="Module__Search">

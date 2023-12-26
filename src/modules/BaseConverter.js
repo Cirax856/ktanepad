@@ -18,8 +18,11 @@ export function BaseConverter() {
         const fromBase = inputBaseRef.current.value;
         const toBase = outputBaseRef.current.value;
 
-        const digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*/";
-    
+        const digitsNormal = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*/";
+        const digits64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+        const digits = fromBase === '64' ? digits64 : digitsNormal;
+
         // converting to base 10
         var base10 = 0;
         var base10exponent = 0;
@@ -33,9 +36,11 @@ export function BaseConverter() {
         var output = "";
     
         while(base10 !== 0) {
-            output += digits[base10 % toBase].toString();
+            output += digitsNormal[base10 % toBase].toString();
             base10 = Math.floor(base10 / toBase);
         }
+
+        if (output === "") output = "0";
     
         outputInputRef.current.value = output.split("").reverse().join("");
     }
