@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain, shell, dialog } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
-const fs = require('fs');
 const { autoUpdater } = require("electron-updater");
 
 autoUpdater.autoDownload = true;
@@ -89,7 +88,7 @@ autoUpdater.on("update-available", (updateInfo) =>
         type: 'info',
         buttons: ['Ok'],
         title: `New version of KTaNEPad is available! (${updateInfo.version})`,
-        detail: `A new version of KTaNEPad is available and being currently downloaded. It is recommended not to start a bomb while the update is installing.\nPatch notes:\n${updateInfo.releaseNotes}`
+        detail: `A new version of KTaNEPad is available and being currently downloaded. It is recommended not to start a bomb while the update is installing.\nPatch notes:\n\n${updateInfo.releaseNotes.replace('<p>', '').replace('<br>', '').replace('</p>', '')}`
     };
 
     dialog.showMessageBox(dialogOpts);

@@ -1,6 +1,7 @@
 .Settings {
     width: 100%;
     height: 100%;
+    padding: 2px;
 }
 
 .Settings__Button {
@@ -14,4 +15,5 @@
     width: 100%;
     height: 3rem;
     font-size: 150%;
+    border: 2px solid #101010;
 }

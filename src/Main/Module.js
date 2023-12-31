@@ -66,6 +66,8 @@ export function Module({ setIsLearning, setIsOptions })
 
     function settingsClick()
     {
+        setSearchValue('');
+        setIsSearching(false);
         setModuleIndex(1);
     }
 
@@ -82,7 +84,7 @@ export function Module({ setIsLearning, setIsOptions })
                                     {
                                         filteredModuleNames.map(x =>
                                         {
-                                            return <button value={x} onClick={(e) => { moduleClick(e.target.value) }} className="Module__ModuleButton">{x}</button>
+                                            return <button key={x} value={x} onClick={(e) => { moduleClick(e.target.value) }} className="Module__ModuleButton">{x}</button>
                                         })
                                     }
                                 </div>
@@ -93,11 +95,11 @@ export function Module({ setIsLearning, setIsOptions })
                 </div>
                 <div className="Module__Search">
                     <div className="Module__imgContainer">
-                        <img src={searchIcon} alt="Search Icon" className="Module__img" onClick={searchIconClick} />
+                        <img draggable="false" src={searchIcon} alt="Search Icon" className="Module__img" onClick={searchIconClick} />
                     </div>
                     <input className="Module__Input" onChange={ModuleSearchCheck} value={searchValue} tabIndex="6"></input>
                     <div className="Module__imgContainer">
-                        <img src={settingsIcon} alt="Settings Icon" className="Module__img" onClick={settingsClick} />
+                        <img draggable="false" src={settingsIcon} alt="Settings Icon" className="Module__img" onClick={settingsClick} />
                     </div>
                 </div>
             </div>

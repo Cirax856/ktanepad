@@ -2,7 +2,8 @@
 import './css/NoModuleCSS.css';
 
 // Main function
-export function NoModule() {
+export function NoModule()
+{
     // HTML
     return (
         <div className="NoModule">

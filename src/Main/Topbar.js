@@ -8,30 +8,34 @@ import maximizeLogo from '../images/maximizelogo.png';
 import closeLogo from '../images/closelogo.png';
 
 // main function
-export function Topbar() {
+export function Topbar()
+{
     // importing electron
     const { ipcRenderer } = window.require('electron');
 
-    function close() {
+    function close()
+    {
         ipcRenderer.send('close');
     }
 
-    function maximize() {
+    function maximize()
+    {
         ipcRenderer.send('max');
     }
 
-    function minimize() {
+    function minimize()
+    {
         ipcRenderer.send('min');
     }
 
     // HTML
     return (
         <div className="Topbar">
-            <img src={ktanepadLogo} alt="KTaNEPad" className="Topbar__img" />
+            <img draggable="false" src={ktanepadLogo} alt="KTaNEPad" className="Topbar__img" />
             <p className="Topbar__Drag Topbar__Text">KTaNEPad</p>
-            <img src={minimizeLogo} alt="Minimize" className="Topbar__img Topbar__Pointer" onClick={minimize} />
-            <img src={maximizeLogo} alt="Maximize" className="Topbar__img Topbar__Pointer" onClick={maximize} />
-            <img src={closeLogo} alt="Close" className="Topbar__img Topbar__Pointer" onClick={close} />
+            <img draggable="false" src={minimizeLogo} alt="Minimize" className="Topbar__img Topbar__Pointer" onClick={minimize} />
+            <img draggable="false" src={maximizeLogo} alt="Maximize" className="Topbar__img Topbar__Pointer" onClick={maximize} />
+            <img draggable="false" src={closeLogo} alt="Close" className="Topbar__img Topbar__Pointer" onClick={close} />
         </div>
     );
 }

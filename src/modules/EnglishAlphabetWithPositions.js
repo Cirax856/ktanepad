@@ -2,7 +2,8 @@
 import './css/EnglishAlphabetWithPositionsCSS.css';
 
 // main function
-export function EnglishAlphabetWithPositions() {
+export function EnglishAlphabetWithPositions()
+{
     // HTML
     return (
         <div className="EnglishAlphabetWithPositions">

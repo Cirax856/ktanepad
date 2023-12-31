@@ -10,13 +10,12 @@
     height: 100%;
 }
 
-.EnglishAlphabetWithPositions__Table tr {
-    border: 1px solid black;
+    .EnglishAlphabetWithPositions__Table tr {
+        border: 1px solid black;
+        display: grid;
+        grid-template-columns: 20% 20%;
+    }
 
-    display: grid;
-    grid-template-columns: 20% 20%;
-}
-
-.EnglishAlphabetWithPositions__Table tr td {
-    padding-left: 10%;
-}
+        .EnglishAlphabetWithPositions__Table tr td {
+            padding-left: 10%;
+        }

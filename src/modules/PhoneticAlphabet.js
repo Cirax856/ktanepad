@@ -2,7 +2,8 @@
 import './css/PhoneticAlphabetCSS.css';
 
 // main function
-export function PhoneticAlphabet() {
+export function PhoneticAlphabet()
+{
     // HTML
     return (
         <div className="PhoneticAlphabet">

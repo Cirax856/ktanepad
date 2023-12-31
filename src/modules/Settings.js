@@ -2,16 +2,19 @@
 import './css/SettingsCSS.css';
 
 // main function
-export function Settings({ setIsLearning, setIsOptions }) {
+export function Settings({ setIsLearning, setIsOptions })
+{
     // importing shell
     const { shell } = window.require('electron');
 
     // clicks
-    function visit() {
+    function visit()
+    {
         shell.openExternal("https://ktane.timwi.de");
     }
 
-    function learning() {
+    function learning()
+    {
         setIsLearning(true);
     }
 

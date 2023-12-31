@@ -5,7 +5,8 @@ import { useRef } from 'react';
 import './css/BaseConverterCSS.css';
 
 // main function
-export function BaseConverter() {
+export function BaseConverter()
+{
     // refs
     const inputInputRef = useRef(null);
     const inputBaseRef = useRef(null);
@@ -13,7 +14,8 @@ export function BaseConverter() {
     const outputBaseRef = useRef(null);
 
     // convert function
-    function convertBase() {
+    function convertBase()
+    {
         const input = inputInputRef.current.value;
         const fromBase = inputBaseRef.current.value;
         const toBase = outputBaseRef.current.value;
@@ -26,22 +28,24 @@ export function BaseConverter() {
         // converting to base 10
         var base10 = 0;
         var base10exponent = 0;
-    
-        for(let i = input.toString().length - 1; i >= 0; i--) {
+
+        for (let i = input.toString().length - 1; i >= 0; i--)
+        {
             base10 += digits.indexOf(input.toString()[i]) * Math.pow(fromBase, base10exponent);
             base10exponent++;
         }
-    
+
         // converting to toBase
         var output = "";
-    
-        while(base10 !== 0) {
+
+        while (base10 !== 0)
+        {
             output += digitsNormal[base10 % toBase].toString();
             base10 = Math.floor(base10 / toBase);
         }
 
         if (output === "") output = "0";
-    
+
         outputInputRef.current.value = output.split("").reverse().join("");
     }
 
