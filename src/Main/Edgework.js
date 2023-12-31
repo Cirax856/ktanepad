@@ -5,12 +5,14 @@ import { useRef } from 'react';
 import './css/EdgeworkCSS.css';
 
 // main function
-export function Edgework() {
+export function Edgework()
+{
     // input ref
     const EdgeworkTextareaRef = useRef(null);
 
     // clear method
-    function EdgeworkClear() {
+    function EdgeworkClear()
+    {
         EdgeworkTextareaRef.current.value = '';
     }
 

@@ -2,7 +2,8 @@
 import './css/MorseCodeTranslationCSS.css';
 
 // main function
-export function MorseCodeTranslation() {
+export function MorseCodeTranslation()
+{
     // HTML
     return (
         <div className="MorseCodeTranslation">

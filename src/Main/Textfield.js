@@ -55,9 +55,9 @@ export function Textfield()
     return (
         <div className="Textfield">
             <div className="Textfield__LineNumbers" ref={lineNumbersRef}>
-                {lineNumbers.map((line, index) => <p class="Textfield__LineNumber" key={index}>{index + 1}</p>)}
+                {lineNumbers.map((line, index) => <p className="Textfield__LineNumber" key={index}>{index + 1}</p>)}
             </div>
-            <textarea className="Textfield__Textarea" ref={textAreaRef} spellCheck="false" onChange={(e) => handleTextareaTextChange(e)} onScroll={handleTextareaScroll} onKeyDown={(e) => {handleKeyDown(e)}}></textarea>
+            <textarea className="Textfield__Textarea" ref={textAreaRef} spellCheck="false" onChange={(e) => handleTextareaTextChange(e)} onScroll={handleTextareaScroll} onKeyDown={(e) => { handleKeyDown(e) }}></textarea>
         </div>
     );
 }
