@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { Topbar } from './Main/Topbar';
 import { Textfield } from './Main/Textfield';
 import { Edgework } from './Main/Edgework';
-import { Module } from './Main/Module';
+import { Tools } from './Main/Tools';
 
 // import css
 import './main.css';
@@ -45,7 +45,7 @@ function App()
                                     <Textfield classname="Main__Textfield" />
                                     <div className="Main__Right_Container">
                                         <Edgework className="Main__Edgework" />
-                                        <Module className="Main__Module" setIsLearning={setIsLearning} setIsOptions={setIsOptions} />
+                                        <Tools className="Main__Tools" setIsLearning={setIsLearning} setIsOptions={setIsOptions} />
                                     </div>
                                 </div >
                             )

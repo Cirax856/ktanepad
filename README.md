@@ -10,7 +10,7 @@ KTaNEPad was made by Cirax856 with ideas from Asmir. You can find everything abo
 
 ## Features
 
-KTaNEPad is an interactive notepad with fields many different features:
+KTaNEPad is an interactive notepad with many different features:
 
 <table>
 <tr>
@@ -33,8 +33,7 @@ KTaNEPad is an interactive notepad with fields many different features:
 - Edgework container
 <div>
 
-    It can provide you with a specific interactive edgework field that 
-    supports switching between fields using the enter key.
+    It can provide you with a specific interactive edgework tab.
 </div>
 </td>
 <td>
@@ -45,22 +44,21 @@ KTaNEPad is an interactive notepad with fields many different features:
 <tr>
 <td>
 
-- Module field
+- Tools tab
 <div>
 
-    The most advanced feature that KTaNEPad has to offer is the module 
-    field.
+    The most advanced feature that KTaNEPad has to offer is the Tools tab.
 </div>
 </td>
 <td>
 
-![Module Field](https://cdn.discordapp.com/attachments/973558049031737394/1089224477436559471/image.png)
+![Tools Tab](https://cdn.discordapp.com/attachments/973558049031737394/1089224477436559471/image.png)
 </td>
 </tr>
 <tr>
 <td>
 
-- Learning Tab
+- Learning tab
 
 <div>
 
