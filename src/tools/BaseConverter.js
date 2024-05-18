@@ -1,5 +1,5 @@
 // importing React
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 // importing CSS
 import './css/BaseConverterCSS.css';
@@ -13,8 +13,11 @@ export function BaseConverter()
     const outputInputRef = useRef(null);
     const outputBaseRef = useRef(null);
 
+    // states
+    const [popup, setPopup] = useState(false);
+
     // convert function
-    function convertBase()
+    function convertBase(type="normal", popup=false)
     {
         const input = inputInputRef.current.value;
         const fromBase = inputBaseRef.current.value;
@@ -23,7 +26,17 @@ export function BaseConverter()
         const digitsNormal = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*/";
         const digits64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-        const digits = fromBase === '64' ? digits64 : digitsNormal;
+        if (!popup)
+        { 
+            if (fromBase === '64')
+                setPopup(true)
+            else
+                setPopup(false)
+        }
+        else
+            setPopup(false);
+
+        const digits = type === "64" ? digits64 : digitsNormal;
 
         // converting to base 10
         var base10 = 0;
@@ -44,7 +57,8 @@ export function BaseConverter()
             base10 = Math.floor(base10 / toBase);
         }
 
-        if (output === "") output = "0";
+        if (output === "")
+            output = "0";
 
         outputInputRef.current.value = output.split("").reverse().join("");
     }
@@ -77,8 +91,25 @@ export function BaseConverter()
                 </div>
             </div>
             <div className="BaseConverter__convert">
-                <button className="BaseConverter__button" onClick={convertBase}>CONVERT</button>
+                <button className="BaseConverter__button" onClick={() => convertBase("normal")}>CONVERT</button>
             </div>
+
+            {
+                popup
+                ?
+                (
+                    <div className="BaseConverter__popup">
+                        <div className="BaseConverter__popup_window">
+                            <p>Some KTaNE modules use Base64 conversion that begins with letters first instead of numbers. Choose one of the options below:</p>
+                            <div>
+                                <button className="BaseConverter__button" onClick={() => convertBase("normal", true)}>Math</button>
+                                <button className="BaseConverter__button" onClick={() => convertBase("64", true)}>Computing</button>
+                            </div>
+                        </div>
+                    </div>
+                )
+                : <></>
+            }
         </div>
     );
 }
