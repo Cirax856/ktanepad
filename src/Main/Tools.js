@@ -17,7 +17,7 @@ import { BaseConverter } from '../tools/BaseConverter';
 import { PhoneticAlphabet } from '../tools/PhoneticAlphabet';
 
 // main function
-export function Tool({ setIsLearning, setIsOptions })
+export function Tools({ setIsLearning, setIsOptions })
 {
     // states
     const [isSearching, setIsSearching] = useState(false);
